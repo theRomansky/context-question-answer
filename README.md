@@ -1,0 +1,1 @@
+This project aims to develop a natural language processing (NLP) system that extracts and analyzes information from PDF documents to generate answers to user questions.
