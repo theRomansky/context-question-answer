@@ -138,13 +138,17 @@ def create_langchain(question, context, model_path):
     :param question: The question to be answered.
     :param context: The context related to the question.
     :param model_path: The path to the model file.
-    :return: The generated answer.
+    :return: The generated answer or "No data to answer the question" if no answer is generated.
     """
     prompt_template = """Context: {context}\n\nQuestion: {question}\n\nAnswer:"""
     prompt = PromptTemplate(input_variables=["context", "question"], template=prompt_template)
     llm = LLM(model=model_path)
     chain = LLMChain(prompt=prompt, llm=llm)
     answer = chain.run(context=context, question=question)
+
+    if not answer.strip():  # Check if the answer is empty or only contains whitespace
+        return "No data to answer the question"
+
     return answer
 
 
